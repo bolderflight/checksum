@@ -12,7 +12,15 @@
 
 namespace checksum {
 /* Fletcher-16 checksum */
-uint16_t Fletcher16(uint8_t *data, std::size_t len);
+class Fletcher16 {
+ public:
+  uint16_t Compute(uint8_t *data, std::size_t len);
+  void Reset();
+  uint16_t Increment(uint8_t *data, std::size_t len);
+
+ private:
+  uint16_t sum0_ = 0, sum1_ = 0;
+};
 }  // namespace checksum
 
 #endif  // INCLUDE_CHECKSUM_CHECKSUM_H_
