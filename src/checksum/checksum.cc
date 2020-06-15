@@ -13,7 +13,9 @@ uint16_t Fletcher16::Compute(uint8_t *data, std::size_t len) {
   if ((len == 0) || (!data)) {
     return 0;
   }
-  for (std::size_t i = 0, sum0_ = 0, sum1_ = 0; i < len; i++) {
+  sum0_ = 0;
+  sum1_ = 0;
+  for (std::size_t i = 0; i < len; i++) {
     sum0_ = (sum0_ + data[i]) % 0xFF;
     sum1_ = (sum1_ + sum0_) % 0xFF;
   }
