@@ -27,7 +27,7 @@ void Fletcher16::Reset() {
   sum1_ = 0;
 }
 
-uint16_t Fletcher16::Increment(uint8_t *data, std::size_t len) {
+uint16_t Fletcher16::Update(uint8_t *data, std::size_t len) {
   if ((len == 0) || (!data)) {
     return 0;
   }

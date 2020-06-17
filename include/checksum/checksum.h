@@ -16,7 +16,7 @@ class Fletcher16 {
  public:
   uint16_t Compute(uint8_t *data, std::size_t len);
   void Reset();
-  uint16_t Increment(uint8_t *data, std::size_t len);
+  uint16_t Update(uint8_t *data, std::size_t len);
 
  private:
   uint16_t sum0_ = 0, sum1_ = 0;

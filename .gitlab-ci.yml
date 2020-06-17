@@ -1,0 +1,32 @@
+stages:
+  - lint
+  - build
+  - test
+
+Lint:
+  stage: lint
+  tags:
+    - bfs
+  script: 
+    - cpplint.py --verbose=0 include/checksum/checksum.h
+    - cpplint.py --verbose=0 src/checksum/checksum.cc
+
+Compile:
+  stage: build
+  tags:
+    - bfs
+  script:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+  artifacts:
+    paths:
+      - build/checksum_test
+  
+Test Types:
+  stage: test
+  tags:
+    - bfs
+  script:
+    - ./build/checksum_test
