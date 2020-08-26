@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(Checksum
-  VERSION 1.0
+  VERSION 1.0.0
   DESCRIPTION "Checksum functions."
   LANGUAGES CXX
 )
@@ -15,6 +15,7 @@ target_include_directories(checksum PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
  	$<INSTALL_INTERFACE:include>
 )
+
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	# Add the example target
