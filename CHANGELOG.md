@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.3
+- Updated CONTRIBUTING
+
 ## v1.0.2
 - Updated CONTRIBUTING
 
