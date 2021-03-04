@@ -21,7 +21,7 @@ make
 This will build the library, an example executable called *checksum_example*, and an executable for testing using the Google Test framework, called *checksum_test*. The example executable source file is located at *examples/checksum_example.cc*.
 
 ## Namespace
-This library is within the namespace *checksum*.
+This library is within the namespace *bfs*.
 
 # Fletcher16
 This class implements a [Fletcher16 checksum](https://en.wikipedia.org/wiki/Fletcher%27s_checksum). 
@@ -31,7 +31,7 @@ This class implements a [Fletcher16 checksum](https://en.wikipedia.org/wiki/Flet
 **Fletcher16()** Creates a Fletcher16 object and initializes the checksum states.
 
 ```C++
-checksum::Fletcher16 chk;
+bfs::Fletcher16 chk;
 ```
 
 **uint16_t Compute(uint8_t &ast;data, std::size_t len)** Initializes the checksum states and computes the checksum in a single pass, given a pointer to an array of the data and the length of the array. The result is returned as a 16 bit unsigned integer.
