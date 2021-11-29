@@ -23,37 +23,25 @@
 * IN THE SOFTWARE.
 */
 
-#include "checksum/checksum.h"
+#ifndef SRC_CHECKSUM_H_
+#define SRC_CHECKSUM_H_
+
+#if defined(ARDUINO)
+#include <Arduino.h>
+#endif
+#include <cstdint>
 
 namespace bfs {
+/* Fletcher-16 checksum */
+class Fletcher16 {
+ public:
+  uint16_t Compute(uint8_t const * data, const std::size_t len);
+  void Reset();
+  uint16_t Update(uint8_t const * data, const std::size_t len);
 
-uint16_t Fletcher16::Compute(uint8_t *data, std::size_t len) {
-  if ((len == 0) || (!data)) {
-    return 0;
-  }
-  sum0_ = 0;
-  sum1_ = 0;
-  for (std::size_t i = 0; i < len; i++) {
-    sum0_ = (sum0_ + data[i]) % 0xFF;
-    sum1_ = (sum1_ + sum0_) % 0xFF;
-  }
-  return sum1_ << 8 | sum0_;
-}
-
-void Fletcher16::Reset() {
-  sum0_ = 0;
-  sum1_ = 0;
-}
-
-uint16_t Fletcher16::Update(uint8_t *data, std::size_t len) {
-  if ((len == 0) || (!data)) {
-    return 0;
-  }
-  for (std::size_t i = 0; i < len; i++) {
-    sum0_ = (sum0_ + data[i]) % 0xFF;
-    sum1_ = (sum1_ + sum0_) % 0xFF;
-  }
-  return sum1_ << 8 | sum0_;
-}
-
+ private:
+  uint16_t sum0_ = 0, sum1_ = 0;
+};
 }  // namespace bfs
+
+#endif  // SRC_CHECKSUM_H_

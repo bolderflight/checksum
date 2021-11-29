@@ -24,37 +24,28 @@
 */
 
 #include "checksum.h"
-#include "gtest/gtest.h"
 
-/* Test the null pointer */
-TEST(Fletcher16, NullPtr) {
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) {}
+  /* Checksum object */
   bfs::Fletcher16 chk;
-  EXPECT_EQ(0, chk.Compute(nullptr, 10.0));
-  EXPECT_EQ(0, chk.Update(nullptr, 10.0));
-}
-/* Test zero length */
-TEST(Fletcher16, ZeroLength) {
-  bfs::Fletcher16 chk;
-  uint8_t test[0];
-  EXPECT_EQ(0, chk.Compute(test, sizeof(test)));
-  EXPECT_EQ(0, chk.Update(test, sizeof(test)));
-}
-/* Test known array */
-TEST(Fletcher16, KnownArray) {
-  bfs::Fletcher16 chk;
+  /* Single pass checksum */
   uint8_t test[] = {'a','b','c','d','e'};
-  EXPECT_EQ(51440, chk.Compute(test, sizeof(test)));
+  uint16_t result = chk.Compute(test, sizeof(test));
+  Serial.println(result);  // 51440
+  /* Multi-pass checksum */
   chk.Reset();
-  EXPECT_EQ(51440, chk.Update(test, sizeof(test)));
-}
-/* Test Compute method */
-TEST(Fletcher16, Compute) {
-  bfs::Fletcher16 chk;
-  uint8_t test[] = {'a','b','c','d','e'};
-  uint16_t result;
   for (std::size_t i = 0; i < sizeof(test); i++) {
     result = chk.Update(&test[i], 1);
   }
-  EXPECT_EQ(51440, result);
-  EXPECT_EQ(51440, chk.Compute(test, sizeof(test)));
+  Serial.println(result);  // 51440
+  chk.Reset();
+  uint8_t test2[] = {'a','b','c','d','e','f','g','h'};
+  for (std::size_t i = 0; i < sizeof(test2); i++) {
+    result = chk.Update(&test2[i], 1);
+  }
+  Serial.println(result);  // 1575
 }
+
+void loop() {}

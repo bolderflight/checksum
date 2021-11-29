@@ -1,14 +1,29 @@
+[![Pipeline](https://gitlab.com/bolderflight/software/checksum/badges/main/pipeline.svg)](https://gitlab.com/bolderflight/software/checksum/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+![Bolder Flight Systems Logo](img/logo-words_75.png) &nbsp; &nbsp; ![Arduino Logo](img/arduino_logo_75.png)
+
 # Checksum
-This library contains checksum functions and classes.
+This library contains clases and methods for computing common checksums. It is compatible with Arduino ARM and CMake build systems.
    * [License](LICENSE.md)
    * [Changelog](CHANGELOG.md)
    * [Contributing guide](CONTRIBUTING.md)
 
-## Installation
+# Installation
+
+## Arduino
+Use the Arduino Library Manager to install this library or clone to your Arduino/libraries folder. This library is added as:
+
+```C++
+#include "checksum.h"
+```
+
+An example Arduino executable is located at *examples/arduino/checksum_example/checksum_example.ino*. Teensy 3.x, 4.x, and LC devices are used for testing under Arduino and this library should be compatible with other ARM devices. This library is *not* expected to work on AVR devices.
+
+## CMake
 CMake is used to build this library, which is exported as a library target called *checksum*. The header is added as:
 
-```
-#include "checksum/checksum.h"
+```C++
+#include "checksum.h"
 ```
 
 The library can be also be compiled stand-alone using the CMake idiom of creating a *build* directory and then, from within that directory issuing:
@@ -18,7 +33,7 @@ cmake ..
 make
 ```
 
-This will build the library, an example executable called *checksum_example*, and an executable for testing using the Google Test framework, called *checksum_test*. The example executable source file is located at *examples/checksum_example.cc*.
+This will build the library, an example executable called *checksum_example*, and an executable for testing using the Google Test framework, called *checksum_test*. The example executable source file is located at *examples/cmake/checksum_example.cc*.
 
 ## Namespace
 This library is within the namespace *bfs*.
