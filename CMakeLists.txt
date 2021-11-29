@@ -1,25 +1,25 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(Checksum
-  VERSION 2.0.0
+  VERSION 3.0.0
   DESCRIPTION "Checksum functions."
   LANGUAGES CXX
 )
 # Add the library target
 add_library(checksum
-	include/checksum/checksum.h
- 	src/checksum/checksum.cc
+	src/checksum.h
+ 	src/checksum.cpp
 )
 # Setup include directories 
 target_include_directories(checksum PUBLIC 
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
  	$<INSTALL_INTERFACE:include>
 )
 
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	# Add the example target
-	add_executable(checksum_example examples/checksum_example.cc)
+	add_executable(checksum_example examples/cmake/checksum_example.cc)
 	# Add the includes
 	target_include_directories(checksum_example PUBLIC 
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -34,8 +34,8 @@ if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	include(FetchContent)
 	FetchContent_Declare(
 		googletest
-		GIT_REPOSITORY 	https://github.com/google/googletest.git
-		GIT_TAG 				release-1.10.0
+		GIT_REPOSITORY https://github.com/google/googletest.git
+		GIT_TAG release-1.10.0
 	)
 	FetchContent_MakeAvailable(googletest)
 	enable_testing()

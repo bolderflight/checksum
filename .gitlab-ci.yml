@@ -8,8 +8,8 @@ Lint:
   tags:
     - bfs
   script: 
-    - cpplint --verbose=0 include/checksum/checksum.h
-    - cpplint --verbose=0 src/checksum/checksum.cc
+    - cpplint --verbose=0 src/checksum.h
+    - cpplint --verbose=0 src/checksum.cpp
 
 Compile:
   stage: build

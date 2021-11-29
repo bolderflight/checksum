@@ -24,7 +24,7 @@
 */
 
 #include <iostream>
-#include "checksum/checksum.h"
+#include "checksum.h"
 
 int main() {
   /* Checksum object */
