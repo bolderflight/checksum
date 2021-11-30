@@ -35,7 +35,7 @@ make
 
 This will build the library, an example executable called *checksum_example*, and an executable for testing using the Google Test framework, called *checksum_test*. The example executable source file is located at *examples/cmake/checksum_example.cc*.
 
-## Namespace
+# Namespace
 This library is within the namespace *bfs*.
 
 # Fletcher16
