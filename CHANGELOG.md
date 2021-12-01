@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.0.1
+- Conditionally include Arduino header
+
 ## v3.0.0
 - Updated directory structure to support Arduino in addition to CMake builds
 - Added an Arduino example

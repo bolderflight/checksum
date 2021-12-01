@@ -29,6 +29,7 @@
 #if defined(ARDUINO)
 #include <Arduino.h>
 #endif
+#include <cstddef>
 #include <cstdint>
 
 namespace bfs {

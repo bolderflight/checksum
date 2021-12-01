@@ -23,7 +23,12 @@
 * IN THE SOFTWARE.
 */
 
+#if defined(ARDUINO)
+#include <Arduino.h>
+#endif
 #include "checksum.h"  // NOLINT
+#include <cstddef>
+#include <cstdint>
 
 namespace bfs {
 
