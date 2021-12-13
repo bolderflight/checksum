@@ -3,7 +3,7 @@
 ![Bolder Flight Systems Logo](img/logo-words_75.png) &nbsp; &nbsp; ![Arduino Logo](img/arduino_logo_75.png)
 
 # Checksum
-This library contains clases and methods for computing common checksums. It is compatible with Arduino ARM and CMake build systems.
+This library contains clases and methods for computing common checksums. This library is compatible with Arduino ARM and with CMake build systems. It would also be easy to include with other projects, since it is a header only library consisting of a single file.
    * [License](LICENSE.md)
    * [Changelog](CHANGELOG.md)
    * [Contributing guide](CONTRIBUTING.md)
@@ -49,7 +49,7 @@ This class implements a [Fletcher16 checksum](https://en.wikipedia.org/wiki/Flet
 bfs::Fletcher16 chk;
 ```
 
-**uint16_t Compute(uint8_t &ast;data, std::size_t len)** Initializes the checksum states and computes the checksum in a single pass, given a pointer to an array of the data and the length of the array. The result is returned as a 16 bit unsigned integer.
+**uint16_t Compute(uint8_t const &ast; const data, const std::size_t len)** Initializes the checksum states and computes the checksum in a single pass, given a pointer to an array of the data and the length of the array. The result is returned as a 16 bit unsigned integer.
 
 ```C++
 uint8_t test[] = {'a','b','c','d','e'};
@@ -57,13 +57,29 @@ uint16_t result = chk.Compute(test, sizeof(test));
 std::cout << result << std::endl;  // 51440
 ```
 
-**uint16_t Update(uint8_t &ast;data, std::size_t len)** Computes the checksum given a pointer to an array of the data and the length of the array. The result is returned as a 16 bit unsigned integer. Note that this method does not reset the checksum states, enabling it to be used iteratively.
+**uint16_t Compute(const std::array<uint8_t, N> &ref)** Same as the previous *Compute* method, but takes a reference to a *std::array* as input rather than a pointer and a length.
+
+```C++
+std::array<uint8_t, 5> test = {'a','b','c','d','e'};
+uint16_t result = chk.Compute(test);
+std::cout << result << std::endl;  // 51440
+```
+
+**uint16_t Update(uint8_t const &ast; const data, const std::size_t len)** Computes the checksum given a pointer to an array of the data and the length of the array. The result is returned as a 16 bit unsigned integer. Note that this method does not reset the checksum states, enabling it to be used iteratively.
 
 ```C++
 uint8_t test[] = {'a','b','c','d','e'};
 for (std::size_t i = 0; i < sizeof(test); i++) {
    result = chk.Update(&test[i], 1);
 }
+std::cout << result << std::endl;  // 51440
+```
+
+**uint16_t Update(const std::array<uint8_t, N> &ref)** Same as the previous *Update* method, but takes a reference to a *std::array* as input rather than a pointer and a length.
+
+```C++
+std::array<uint8_t, 5> test = {'a','b','c','d','e'};
+uint16_t result = chk.Update(test);
 std::cout << result << std::endl;  // 51440
 ```
 

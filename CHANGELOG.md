@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.1.0
+- Updated to be a header-only library
+- Updated constness of methods
+- Added std::array methods in addition to pointer and length
+
 ## v3.0.1
 - Conditionally include Arduino header
 

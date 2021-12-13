@@ -31,14 +31,46 @@
 #endif
 #include <cstddef>
 #include <cstdint>
+#include <array>
 
 namespace bfs {
 /* Fletcher-16 checksum */
 class Fletcher16 {
  public:
-  uint16_t Compute(uint8_t const * data, const std::size_t len);
-  void Reset();
-  uint16_t Update(uint8_t const * data, const std::size_t len);
+  uint16_t Compute(uint8_t const * const data, const std::size_t len) {
+    if ((len == 0) || (!data)) {
+      return 0;
+    }
+    sum0_ = 0;
+    sum1_ = 0;
+    for (std::size_t i = 0; i < len; i++) {
+      sum0_ = (sum0_ + data[i]) % 0xFF;
+      sum1_ = (sum1_ + sum0_) % 0xFF;
+    }
+    return sum1_ << 8 | sum0_;
+  }
+  template<std::size_t N>
+  uint16_t Compute(const std::array<uint8_t, N> &ref) {
+    return Compute(ref.data(), ref.size());
+  }
+  void Reset() {
+    sum0_ = 0;
+    sum1_ = 0;
+  }
+  uint16_t Update(uint8_t const * const data, const std::size_t len) {
+    if ((len == 0) || (!data)) {
+      return 0;
+    }
+    for (std::size_t i = 0; i < len; i++) {
+      sum0_ = (sum0_ + data[i]) % 0xFF;
+      sum1_ = (sum1_ + sum0_) % 0xFF;
+    }
+    return sum1_ << 8 | sum0_;
+  }
+  template<std::size_t N>
+  uint16_t Update(const std::array<uint8_t, N> &ref) {
+    return Update(ref.data(), ref.size());
+  }
 
  private:
   uint16_t sum0_ = 0, sum1_ = 0;
