@@ -47,6 +47,14 @@ TEST(Fletcher16, KnownArray) {
   chk.Reset();
   EXPECT_EQ(51440, chk.Update(test, sizeof(test)));
 }
+/* Test std::array */
+TEST(Fletcher16, stdArray) {
+  bfs::Fletcher16 chk;
+  std::array<uint8_t, 5> test = {'a','b','c','d','e'};
+  EXPECT_EQ(51440, chk.Compute(test));
+  chk.Reset();
+  EXPECT_EQ(51440, chk.Update(test));
+}
 /* Test Compute method */
 TEST(Fletcher16, Compute) {
   bfs::Fletcher16 chk;

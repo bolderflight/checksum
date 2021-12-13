@@ -1,20 +1,14 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(Checksum
-  VERSION 3.0.1
+  VERSION 3.1.0
   DESCRIPTION "Checksum functions."
   LANGUAGES CXX
 )
 # Add the library target
-add_library(checksum
-	src/checksum.h
- 	src/checksum.cpp
-)
+add_library(checksum INTERFACE)
 # Setup include directories 
-target_include_directories(checksum PUBLIC 
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
- 	$<INSTALL_INTERFACE:include>
-)
+target_include_directories(checksum INTERFACE src/)
 
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
