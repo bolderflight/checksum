@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.14)
 # Project information
 project(Checksum
-  VERSION 3.1.0
+  VERSION 3.1.1
   DESCRIPTION "Checksum functions."
   LANGUAGES CXX
 )
