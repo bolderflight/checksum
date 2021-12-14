@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.1.1
+- Updated minimum CMake version to 3.14 to support FetchContent_MakeAvailable
+
 ## v3.1.0
 - Updated to be a header-only library
 - Updated constness of methods
