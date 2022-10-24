@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2021 Bolder Flight Systems Inc
+* Copyright (c) 2022 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -36,13 +36,13 @@ void setup() {
   Serial.println(result);  // 51440
   /* Multi-pass checksum */
   chk.Reset();
-  for (std::size_t i = 0; i < sizeof(test); i++) {
+  for (size_t i = 0; i < sizeof(test); i++) {
     result = chk.Update(&test[i], 1);
   }
   Serial.println(result);  // 51440
   chk.Reset();
   uint8_t test2[] = {'a','b','c','d','e','f','g','h'};
-  for (std::size_t i = 0; i < sizeof(test2); i++) {
+  for (size_t i = 0; i < sizeof(test2); i++) {
     result = chk.Update(&test2[i], 1);
   }
   Serial.println(result);  // 1575
