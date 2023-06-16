@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.0.0
+- Moved to header and source file to speed compilation
+
 ## v3.2.0
 - Removed std::array interface and changed std::size_t to size_t to support Arduino AVR
 

@@ -9,6 +9,7 @@ Lint:
     - bfs
   script: 
     - cpplint --verbose=0 src/checksum.h
+    - cpplint --verbose=0 src/checksum.cpp
 
 Compile:
   stage: build

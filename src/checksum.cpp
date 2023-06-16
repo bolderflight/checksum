@@ -23,9 +23,6 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef CHECKSUM_SRC_CHECKSUM_H_  // NOLINT
-#define CHECKSUM_SRC_CHECKSUM_H_
-
 #if defined(ARDUINO)
 #include <Arduino.h>
 #else
@@ -33,17 +30,35 @@
 #include <cstdint>
 #endif
 
+#include "checksum.h"  // NOLINT
+
 namespace bfs {
-/* Fletcher-16 checksum */
-class Fletcher16 {
- public:
-  uint16_t Compute(uint8_t const * const data, const size_t len);
-  void Reset();
-  uint16_t Update(uint8_t const * const data, const size_t len);
+uint16_t Fletcher16::Compute(uint8_t const * const data, const size_t len) {
+  if ((len == 0) || (!data)) {
+    return 0;
+  }
+  sum0_ = 0;
+  sum1_ = 0;
+  for (size_t i = 0; i < len; i++) {
+    sum0_ = (sum0_ + data[i]) % 0xFF;
+    sum1_ = (sum1_ + sum0_) % 0xFF;
+  }
+  return sum1_ << 8 | sum0_;
+}
 
- private:
-  uint16_t sum0_ = 0, sum1_ = 0;
-};
+void Fletcher16::Reset() {
+  sum0_ = 0;
+  sum1_ = 0;
+}
+
+uint16_t Fletcher16::Update(uint8_t const * const data, const size_t len) {
+  if ((len == 0) || (!data)) {
+    return sum1_ << 8 | sum0_;
+  }
+  for (size_t i = 0; i < len; i++) {
+    sum0_ = (sum0_ + data[i]) % 0xFF;
+    sum1_ = (sum1_ + sum0_) % 0xFF;
+  }
+  return sum1_ << 8 | sum0_;
+}
 }  // namespace bfs
-
-#endif  // CHECKSUM_SRC_CHECKSUM_H_ NOLINT
